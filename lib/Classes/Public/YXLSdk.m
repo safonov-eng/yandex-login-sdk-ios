@@ -300,9 +300,10 @@ API_AVAILABLE(ios(13.0))
         [application openURL:url options:options completionHandler:completion];
     }
     else {
-        BOOL result = [application openURL:url];
         if (completion != NULL) {
-            completion(result);
+            [application openURL:url options:@{} completionHandler:^(BOOL success) {
+                completion(success);
+            }];
         }
     }
 }
